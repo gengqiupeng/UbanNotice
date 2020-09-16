@@ -22,10 +22,11 @@ class MailNotice extends Handle
             $html = $response->getContent();
             $userConfig = new UbanMailUserConfig();
             $config = $userConfig->getMailConfig();
-            $sendTo = Config::get("app.bug_to");
+            $sendTo = Config::get("app.bug_mail_to");
+            $title = Config::get("app.bug_notice_title");
             $sendTo = explode(",", $sendTo);
             foreach ($sendTo as $item) {
-                UbanMail::sendMail($config, "杂志社项目报错", $html, $item);
+                UbanMail::sendMail($config, $title, $html, $item);
             }
         }
         // 其他错误交给系统处理
